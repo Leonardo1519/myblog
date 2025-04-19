@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaArrowLeft, FaCalendarAlt, FaTag, FaEye } from 'react-icons/fa';
 import { useParams } from 'next/navigation';
+import BackToTop from '../../components/BackToTop';
 import type { Post } from '../../lib/markdown';
 
 export default function PostPage() {
@@ -143,6 +144,8 @@ export default function PostPage() {
         className="prose prose-lg prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }} 
       />
+      
+      <BackToTop />
     </article>
   );
 } 

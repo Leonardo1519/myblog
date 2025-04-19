@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import PostCard from './components/PostCard';
 import ProfileCard from './components/ProfileCard';
+import BackToTop from './components/BackToTop';
 import type { PostMetadata } from './lib/markdown';
 
 export default function Home() {
@@ -69,6 +70,9 @@ export default function Home() {
           )}
         </div>
       </div>
+      
+      {/* 返回顶部按钮 */}
+      <BackToTop />
     </div>
   );
 }

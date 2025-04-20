@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaHome, FaSearch, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaBars, FaTimes } from 'react-icons/fa';
 import SearchBar from '../SearchBar';
 
 export default function Header() {

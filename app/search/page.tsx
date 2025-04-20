@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PostCard from '../components/PostCard';
 import { FaSearch } from 'react-icons/fa';
@@ -8,7 +8,8 @@ import { FaSearch } from 'react-icons/fa';
 // 从markdown.ts导入PostMetadata类型，但不导入任何使用fs的函数
 import type { PostMetadata } from '../lib/markdown';
 
-export default function SearchPage() {
+// 搜索结果组件
+function SearchResults() {
   const searchParams = useSearchParams();
   const [searchResults, setSearchResults] = useState<PostMetadata[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,7 +55,7 @@ export default function SearchPage() {
           <p className="text-gray-400 flex items-center gap-2">
             <FaSearch />
             <span>
-              关键词: <span className="text-blue-400">"{query}"</span>
+              关键词: <span className="text-blue-400">&quot;{query}&quot;</span>
               {searchResults && searchResults.length > 0 && (
                 <span className="ml-2">找到 {searchResults.length} 篇文章</span>
               )}
@@ -91,5 +92,29 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// 搜索页面的加载状态
+function SearchPageLoading() {
+  return (
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-4">搜索结果</h1>
+        <p className="text-gray-400">加载中...</p>
+      </div>
+      <div className="text-center py-16">
+        <p className="text-xl text-gray-400">正在加载搜索功能...</p>
+      </div>
+    </div>
+  );
+}
+
+// 主搜索页面组件
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchPageLoading />}>
+      <SearchResults />
+    </Suspense>
   );
 } 

@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function SearchBar() {
+// 搜索表单组件
+function SearchForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,5 +42,25 @@ export default function SearchBar() {
         <FaSearch />
       </button>
     </form>
+  );
+}
+
+// 搜索栏加载中状态
+function SearchBarFallback() {
+  return (
+    <div className="relative w-full max-w-md">
+      <div className="w-full px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-md text-gray-500">
+        加载中...
+      </div>
+    </div>
+  );
+}
+
+// 主搜索栏组件
+export default function SearchBar() {
+  return (
+    <Suspense fallback={<SearchBarFallback />}>
+      <SearchForm />
+    </Suspense>
   );
 } 

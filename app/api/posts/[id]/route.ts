@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getPostData } from '../../../lib/markdown';
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const id = params.id;
+  const id = context.params.id;
   console.log(`API: 正在获取文章 ID [${id}]`);
 
   try {

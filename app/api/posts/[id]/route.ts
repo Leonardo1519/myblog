@@ -1,11 +1,12 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getPostData } from '../../../lib/markdown';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: any
 ) {
-  const id = params.id;
+  const id = context.params.id;
   console.log(`API: 正在获取文章 ID [${id}]`);
 
   try {

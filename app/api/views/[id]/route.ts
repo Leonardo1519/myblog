@@ -1,12 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getPostViews, incrementPostViews } from '@/app/lib/viewsCounter';
 
 // GET: 获取文章浏览量
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: any
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     const views = getPostViews(id);
@@ -21,11 +22,12 @@ export async function GET(
 }
 
 // POST: 增加文章浏览量
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: any
 ) {
-  const id = params.id;
+  const id = context.params.id;
   
   try {
     const views = incrementPostViews(id);
